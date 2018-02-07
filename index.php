@@ -58,7 +58,7 @@
                             <th>Sobrenome</th>
                         </thead>
                         <tbody>
-                            <tr nr-repeat="x in nomes">
+                            <tr ng-repeat="x in nomes">
                                 <td>
                                     {{x.nome}}
                                 </td>
@@ -106,7 +106,7 @@
         $scope.mostrarDados = function(){
             $http.get("select.php").
             then(function (success){
-                $scope.nomes = success;
+                $scope.nomes = success.data;
             },
             function failed(error){
                 
