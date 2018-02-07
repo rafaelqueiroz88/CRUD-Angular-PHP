@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "root";
-$db = "nome_banco";
+$db = "remember_development";
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error)

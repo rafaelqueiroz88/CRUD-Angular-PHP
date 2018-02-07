@@ -16,30 +16,59 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     </head>
     <body>
-        
-        <h1>Cadastro</h1>
-
-        <hr />
-
-        <div class="container" ng-app="aplicativo" ng-controller="usercontroller">
+        <div class="container" ng-app="aplicativo" ng-controller="usercontroller" ng-init="mostrarDados()">
             <div class="row">
+                <div class="col col-3"></div>
+                <div class="col col-6">
+                    <h1>Cadastro</h1>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-3"></div>
                 <div class="col col-6">
                     <label for="nome">Nome: </label>
                     <input type="text" class="form-control" name="_nome" ng-model="nome" />
                 </div>
             </div>
             <div class="row">
+                <div class="col col-3"></div>
                 <div class="col col-6">
                     <label for="sobrenome">Sobrenome: </label>
                     <input type="text" class="form-control" name="_sobrenome" ng-model="sobrenome" />
                 </div>
             </div>
             <div class="row">
+                <div class="col col-3"></div>
                 <div class="col col-6">
                     <br />
                     <button class="btn btn-outline-primary btn-sm btn-block" ng-click="inserirDados()">
                         Enviar
                     </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-3"></div>
+                <div class="col col-6">
+                    <hr />
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                        </thead>
+                        <tbody>
+                            <tr nr-repeat="x in nomes">
+                                <td>
+                                    {{x.nome}}
+                                </td>
+                                <td>
+                                    {{x.sobrenome}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
@@ -63,14 +92,24 @@
     var app = angular.module("aplicativo", []);
     app.controller("usercontroller", function($scope, $http){
         $scope.inserirDados = function(){
-            $http.post("http://localhost:8000/Treinamento%20PHP-Angularjs/insert.php", { 'nome' : $scope.nome, 'sobrenome' : $scope.sobrenome } ).
+            $http.post("insert.php", { 'nome' : $scope.nome, 'sobrenome' : $scope.sobrenome } ).
             then(function (success){
                 alert('Dados enviados com sucesso! Nome: ' + $scope.nome + '. Sobrenome: ' + $scope.sobrenome);
                 $scope.nome = null;
                 $scope.sobrenome = null;
+                $scope.mostrarDados();
             },
             function (error){
                 alert('Falha ao enviar o formulário!');
+            });
+        }
+        $scope.mostrarDados = function(){
+            $http.get("select.php").
+            then(function (success){
+                $scope.nomes = success;
+            },
+            function failed(error){
+                
             });
         }
     });
