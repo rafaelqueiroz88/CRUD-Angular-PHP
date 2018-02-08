@@ -1,5 +1,5 @@
 <?php
-
+    //
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,46 +16,58 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     </head>
     <body>
+
         <div class="container" ng-app="aplicativo" ng-controller="usercontroller" ng-init="mostrarDados()">
             <div class="row">
                 <div class="col col-3"></div>
                 <div class="col col-6">
+
                     <h1>Cadastro</h1>
                     <hr />
+
+                    <input type="hidden" ng-model="id">
+
                 </div>
             </div>
             <div class="row">
                 <div class="col col-3"></div>
                 <div class="col col-6">
+
                     <label for="nome">Nome: </label>
                     <input type="text" class="form-control" name="_nome" ng-model="nome" />
+
                 </div>
             </div>
             <div class="row">
                 <div class="col col-3"></div>
                 <div class="col col-6">
+
                     <label for="sobrenome">Sobrenome: </label>
                     <input type="text" class="form-control" name="_sobrenome" ng-model="sobrenome" />
+
                 </div>
             </div>
             <div class="row">
                 <div class="col col-3"></div>
                 <div class="col col-6">
+
                     <br />
                     <button class="btn btn-outline-primary btn-sm btn-block" ng-click="inserirDados()">
-                        Enviar
+                        {{acaoBotao}}
                     </button>
+
                 </div>
             </div>
             <div class="row">
                 <div class="col col-3"></div>
                 <div class="col col-6">
-                    <hr />
 
+                    <hr />
                     <table class="table table-bordered">
                         <thead>
                             <th>Nome</th>
                             <th>Sobrenome</th>
+                            <th>Ações</th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="x in nomes">
@@ -64,6 +76,15 @@
                                 </td>
                                 <td>
                                     {{x.sobrenome}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline-info" ng-click="atualizarDados(x.id, x.nome, x.sobrenome)">
+                                        Atualizar
+                                    </button>
+                                    
+                                    <button class="btn btn-danger" ng-click="apagarDados(x.id)">
+                                        Apagar
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -85,32 +106,7 @@
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
             crossorigin="anonymous"></script>
+        <script src="application.js"></script>
+
     </body>
 </html>
-
-<script>
-    var app = angular.module("aplicativo", []);
-    app.controller("usercontroller", function($scope, $http){
-        $scope.inserirDados = function(){
-            $http.post("insert.php", { 'nome' : $scope.nome, 'sobrenome' : $scope.sobrenome } ).
-            then(function (success){
-                alert('Dados enviados com sucesso! Nome: ' + $scope.nome + '. Sobrenome: ' + $scope.sobrenome);
-                $scope.nome = null;
-                $scope.sobrenome = null;
-                $scope.mostrarDados();
-            },
-            function (error){
-                alert('Falha ao enviar o formulário!');
-            });
-        }
-        $scope.mostrarDados = function(){
-            $http.get("select.php").
-            then(function (success){
-                $scope.nomes = success.data;
-            },
-            function failed(error){
-                
-            });
-        }
-    });
-</script>
