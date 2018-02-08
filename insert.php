@@ -30,9 +30,7 @@ if($botao == 'Cadastrar')
 }
 else if ($botao == 'Atualizar')
 {
-
     $id = $data['id'];
-
     $sql = "UPDATE usuarios SET nome = '$nome', sobrenome = '$sobrenome' WHERE id = $id";
     if ($conn->query($sql) === TRUE)
     {
@@ -43,7 +41,5 @@ else if ($botao == 'Atualizar')
         echo "Erro detectado: ".$sql."<br/>".$conn->error;
     }
 }
-
-
 
 $conn->close();

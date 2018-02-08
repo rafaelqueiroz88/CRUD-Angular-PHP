@@ -1,6 +1,5 @@
 <?php
 
-//Atribuindo informações do banco de dados
 $host = "localhost";
 $user = "root";
 $pass = "root";
