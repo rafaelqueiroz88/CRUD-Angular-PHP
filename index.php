@@ -22,7 +22,7 @@
                 <div class="col col-3"></div>
                 <div class="col col-6">
 
-                    <h1>Cadastro</h1>
+                    <h1 align="center">Cadastro</h1>
                     <hr />
 
                     <input type="hidden" ng-model="id">
@@ -67,7 +67,7 @@
                         <thead>
                             <th>Nome</th>
                             <th>Sobrenome</th>
-                            <th>Ações</th>
+                            <th style="text-align: center;">Ações</th>
                         </thead>
                         <tbody>
                             <tr ng-repeat="x in nomes">
@@ -77,7 +77,7 @@
                                 <td>
                                     {{x.sobrenome}}
                                 </td>
-                                <td>
+                                <td align="center">
                                     <button class="btn btn-outline-info" ng-click="atualizarDados(x.id, x.nome, x.sobrenome)">
                                         Atualizar
                                     </button>
