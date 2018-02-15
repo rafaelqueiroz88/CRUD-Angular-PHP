@@ -1,4 +1,30 @@
-var app = angular.module("aplicativo", []);
+var app = angular.module("aplicativo", ['ngRoute', 'ngAnimate']);
+
+app.config(function($routeProvider) {
+    $routeProvider
+    	.when('/', {
+    		templateUrl: './home.php',
+            controller: 'homecontroller'
+        })
+        .when('/home', {
+    		templateUrl: './home.php',
+            controller: 'homecontroller'
+    	})
+    	.when('/cadastro', {
+    		templateUrl: './cadastro.php',
+            controller: 'usercontroller'
+    	});
+
+});
+
+app.controller('homecontroller', function($scope) {
+    $scope.mainClass = 'home';
+});
+
+app.controller('usercontroller', function($scope) {
+    $scope.mainClass = 'cadastro';
+});
+
 app.controller("usercontroller", function($scope, $http){
     $scope.acaoBotao = "Cadastrar";
     $scope.inserirDados = function(){
@@ -12,16 +38,8 @@ app.controller("usercontroller", function($scope, $http){
         }
         else
         {
-            $http.post("insert.php", { 'nome' : $scope.nome, 'sobrenome' : $scope.sobrenome, 'acaoBotao' : $scope.acaoBotao, 'id' : $scope.id } ).
+            $http.post("insert.php", {'nome' : $scope.nome, 'sobrenome' : $scope.sobrenome, 'acaoBotao' : $scope.acaoBotao, 'id' : $scope.id}).
             then(function (success){
-                if($scope.acaoBotao == "Cadastrar")
-                {
-                    alert('Dados enviados com sucesso! Nome: ' + $scope.nome + '. Sobrenome: ' + $scope.sobrenome);
-                }
-                else if($scope.acaoBotao == "Atualizar")
-                {
-                    alert('Dados atualizados com sucesso! Nome: ' + $scope.nome + '. Sobrenome: ' + $scope.sobrenome);
-                }                    
                 $scope.nome = null;
                 $scope.sobrenome = null;
                 $scope.acaoBotao = "Cadastrar";

@@ -12,7 +12,7 @@ if ($conn->connect_error)
 }
 
 $output = array();
-$sql = "SELECT * FROM usuarios LIMIT 15";
+$sql = "SELECT * FROM usuarios ORDER BY id DESC LIMIT 15 ";
 $conn->query($sql);
 $result = $conn->query($sql);
 

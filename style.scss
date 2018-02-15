@@ -1,0 +1,28 @@
+body {
+    padding-top: 90px; 
+}
+
+main.ng-enter {
+    transition: .5s linear all;
+    opacity: 0;
+}
+  
+/* The finishing CSS styles for the enter animation */
+main.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+#lista-nomes {
+	overflow: hidden;
+}
+
+#lista-nomes tr.ng-enter {
+	transition: .5s linear all;
+	opacity: 0;
+	transform: translateY(-100%);
+}
+
+#lista-nomes tr.ng-enter.ng-enter-active {
+	opacity: 1;
+	transform: translateY(0);
+}
